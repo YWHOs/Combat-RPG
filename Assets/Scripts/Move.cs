@@ -6,11 +6,26 @@ using UnityEngine.AI;
 public class Move : MonoBehaviour
 {
     [SerializeField] Transform target;
-    
 
     // Update is called once per frame
     void Update()
     {
-        GetComponent<NavMeshAgent>().destination = target.position;
+        if (Input.GetMouseButtonDown(0))
+        {
+            MoveToCursor();
+        }
+
+    }
+
+    void MoveToCursor()
+    {
+        Ray rayPoint = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        bool isHit = Physics.Raycast(rayPoint, out hit);
+
+        if (isHit)
+        {
+            GetComponent<NavMeshAgent>().destination = hit.point;
+        }
     }
 }
