@@ -14,7 +14,7 @@ public class Move : MonoBehaviour
         {
             MoveToCursor();
         }
-
+        UpdateAnimation();
     }
 
     void MoveToCursor()
@@ -27,5 +27,12 @@ public class Move : MonoBehaviour
         {
             GetComponent<NavMeshAgent>().destination = hit.point;
         }
+    }
+    void UpdateAnimation()
+    {
+        Vector3 velocity = GetComponent<NavMeshAgent>().velocity;
+        Vector3 local = transform.InverseTransformDirection(velocity);
+        float speed = local.z;
+        GetComponent<Animator>().SetFloat("ForwardSpeed", speed);
     }
 }
