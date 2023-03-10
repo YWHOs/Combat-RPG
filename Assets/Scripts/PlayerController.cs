@@ -10,11 +10,11 @@ namespace RPG.Control
     {
         void Update()
         {
-            InteractCombat();
-            InteractMove();
+            if (InteractCombat()) return;
+            if (InteractMove()) return;
         }
 
-        void InteractCombat()
+        bool InteractCombat()
         {
             RaycastHit[] hits = Physics.RaycastAll(GetRay());
             foreach(RaycastHit hit in hits)
@@ -26,25 +26,25 @@ namespace RPG.Control
                 {
                     GetComponent<Fighter>().Attack(target);
                 }
+                return true;
             }
-        }
-        void InteractMove()
-        {
-            if (Input.GetMouseButton(0))
-            {
-                MoveToCursor();
-            }
+            return false;
         }
 
-        void MoveToCursor()
+        bool InteractMove()
         {
             RaycastHit hit;
             bool isHit = Physics.Raycast(GetRay(), out hit);
 
             if (isHit)
             {
-                GetComponent<Move>().MoveTo(hit.point);
+                if (Input.GetMouseButton(0))
+                {
+                    GetComponent<Move>().MoveTo(hit.point);
+                }
+                return true;
             }
+            return false;
         }
 
         private static Ray GetRay()
