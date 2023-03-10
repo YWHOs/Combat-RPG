@@ -30,20 +30,29 @@ namespace RPG.Combat
             }
         }
 
-        private void AttackAnimator()
+        void AttackAnimator()
         {
-            if(lastTime > time)
+            transform.LookAt(target.transform);
+            if (lastTime > time)
             {
-                GetComponent<Animator>().SetTrigger("Attack");
+                AttackTrigger();
                 lastTime = 0f;
             }
         }
+
+        void AttackTrigger()
+        {
+            GetComponent<Animator>().ResetTrigger("StopAttack");
+            GetComponent<Animator>().SetTrigger("Attack");
+        }
+
         // Animation Event
         void Hit()
         {
+            if (target == null) return;
             target.TakeDamage(weaponDamage);
         }
-        private bool IsRange()
+        bool IsRange()
         {
             return Vector3.Distance(transform.position, target.transform.position) < weaponRange;
         }
@@ -53,10 +62,22 @@ namespace RPG.Combat
             GetComponent<ActionScheduler>().StartAction(this);
             target = _target.GetComponent<Health>();
         }
+        public bool CanAttack(CombatTarget _target)
+        {
+            if(_target == null) { return false; }
+            Health health = _target.GetComponent<Health>();
+            return health != null && !health.IsDead();
+        }
         public void Cancel()
         {
-            GetComponent<Animator>().SetTrigger("StopAttack");
+            StopAttackTrigger();
             target = null;
+        }
+
+        void StopAttackTrigger()
+        {
+            GetComponent<Animator>().ResetTrigger("Attack");
+            GetComponent<Animator>().SetTrigger("StopAttack");
         }
     }
 }
