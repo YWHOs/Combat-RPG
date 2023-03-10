@@ -5,29 +5,17 @@ using UnityEngine.AI;
 
 public class Move : MonoBehaviour
 {
-    [SerializeField] Transform target;
-
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            MoveToCursor();
-        }
         UpdateAnimation();
     }
 
-    void MoveToCursor()
+    public void MoveTo(Vector3 destination)
     {
-        Ray rayPoint = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        bool isHit = Physics.Raycast(rayPoint, out hit);
-
-        if (isHit)
-        {
-            GetComponent<NavMeshAgent>().destination = hit.point;
-        }
+        GetComponent<NavMeshAgent>().destination = destination;
     }
+
     void UpdateAnimation()
     {
         Vector3 velocity = GetComponent<NavMeshAgent>().velocity;
