@@ -1,4 +1,3 @@
-using RPG.Combat;
 using RPG.Core;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using UnityEngine.AI;
 
 namespace RPG.Movement
 {
-    public class Move : MonoBehaviour
+    public class Move : MonoBehaviour, IAction
     {
         NavMeshAgent nav;
         void Start()
@@ -19,10 +18,10 @@ namespace RPG.Movement
         {
             UpdateAnimation();
         }
+
         public void StartMove(Vector3 _destination)
         {
             GetComponent<ActionScheduler>().StartAction(this);
-            GetComponent<Fighter>().Cancel();
             MoveTo(_destination);
         }
         public void MoveTo(Vector3 _destination)
@@ -30,7 +29,7 @@ namespace RPG.Movement
             nav.destination = _destination;
             nav.isStopped = false;
         }
-        public void Stop()
+        public void Cancel()
         {
             nav.isStopped = true;
         }
