@@ -1,3 +1,4 @@
+using RPG.Combat;
 using RPG.Movement;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,14 +8,27 @@ namespace RPG.Control
 {
     public class PlayerController : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        void Update()
         {
-
+            InteractCombat();
+            InteractMove();
         }
 
-        // Update is called once per frame
-        void Update()
+        void InteractCombat()
+        {
+            RaycastHit[] hits = Physics.RaycastAll(GetRay());
+            foreach(RaycastHit hit in hits)
+            {
+                CombatTarget target = hit.transform.GetComponent<CombatTarget>();
+                if (target == null) continue;
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    GetComponent<Fighter>().Attack(target);
+                }
+            }
+        }
+        void InteractMove()
         {
             if (Input.GetMouseButton(0))
             {
@@ -24,14 +38,18 @@ namespace RPG.Control
 
         void MoveToCursor()
         {
-            Ray rayPoint = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            bool isHit = Physics.Raycast(rayPoint, out hit);
+            bool isHit = Physics.Raycast(GetRay(), out hit);
 
             if (isHit)
             {
                 GetComponent<Move>().MoveTo(hit.point);
             }
+        }
+
+        private static Ray GetRay()
+        {
+            return Camera.main.ScreenPointToRay(Input.mousePosition);
         }
     }
 
