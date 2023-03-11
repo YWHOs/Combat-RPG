@@ -13,7 +13,7 @@ namespace RPG.Combat
         [SerializeField] float weaponDamage = 15f;
 
         Health target;
-        float lastTime = 0f;
+        float lastTime = Mathf.Infinity;
         void Update()
         {
             lastTime += Time.deltaTime;
