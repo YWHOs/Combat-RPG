@@ -15,6 +15,8 @@ namespace RPG.Control
         [SerializeField] PatrolPath patrolPath;
         [SerializeField] float waypoint = 1f;
         [SerializeField] float waypointDwellTime = 3f;
+        [Range(0, 1)]
+        [SerializeField] float patrolSpeed = 0.2f;
 
         Vector3 originPos;
         float timeSawPlayer = Mathf.Infinity;
@@ -75,7 +77,7 @@ namespace RPG.Control
             }
             if (timeArrivedAtWaypoint > waypointDwellTime)
             {
-                move.StartMove(nextPos);
+                move.StartMove(nextPos, patrolSpeed);
             }
         }
 

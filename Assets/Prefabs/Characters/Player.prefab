@@ -92,6 +92,10 @@ PrefabInstance:
       propertyPath: health
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 1093697300547316602, guid: 33ac4d4580e08df4095d89f5dd928b88, type: 3}
+      propertyPath: weaponDamage
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3204576090905921909, guid: 33ac4d4580e08df4095d89f5dd928b88, type: 3}
       propertyPath: m_RootOrder
       value: 0
