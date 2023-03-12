@@ -1,6 +1,7 @@
 using RPG.Combat;
 using RPG.Core;
 using RPG.Movement;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,9 +12,12 @@ namespace RPG.Control
     {
         [SerializeField] float chaseDt = 5f;
         [SerializeField] float timeSuspicion = 4f;
+        [SerializeField] PatrolPath patrolPath;
+        [SerializeField] float waypoint = 1f;
 
         Vector3 originPos;
         float timeSawPlayer = Mathf.Infinity;
+        int currentWaypoint;
 
         Fighter fighter;
         Health health;
@@ -45,18 +49,48 @@ namespace RPG.Control
             }
             else
             {
-                move.StartMove(originPos);
+                PatrolBehaviour();
             }
 
             timeSawPlayer += Time.deltaTime;
         }
 
-        private void SuspicionBehaviour()
+        void PatrolBehaviour()
+        {
+            Vector3 nextPos = originPos;
+            if(patrolPath != null)
+            {
+                if (IsWaypoint())
+                {
+                    CycleWaypoint();
+                }
+                nextPos = GetWaypoint();
+            }
+            move.StartMove(nextPos);
+        }
+
+        Vector3 GetWaypoint()
+        {
+            return patrolPath.GetWaypoint(currentWaypoint);
+        }
+
+        void CycleWaypoint()
+        {
+            currentWaypoint = patrolPath.GetNextIndex(currentWaypoint);
+        }
+
+        bool IsWaypoint()
+        {
+            float distanceToWaypoint = Vector3.Distance(transform.position, GetWaypoint());
+            return distanceToWaypoint < waypoint;
+        }
+
+        void SuspicionBehaviour()
         {
             GetComponent<ActionScheduler>().CancelAction();
         }
 
-        private void AttackBehaviour()
+        void AttackBehaviour()
         {
             fighter.Attack(player);
         }
