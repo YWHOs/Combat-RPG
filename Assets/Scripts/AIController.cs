@@ -14,9 +14,11 @@ namespace RPG.Control
         [SerializeField] float timeSuspicion = 4f;
         [SerializeField] PatrolPath patrolPath;
         [SerializeField] float waypoint = 1f;
+        [SerializeField] float waypointDwellTime = 3f;
 
         Vector3 originPos;
         float timeSawPlayer = Mathf.Infinity;
+        float timeArrivedAtWaypoint = Mathf.Infinity;
         int currentWaypoint;
 
         Fighter fighter;
@@ -40,7 +42,6 @@ namespace RPG.Control
             if (health.IsDead()) return;
             if (IsAttackRange() && fighter.CanAttack(player))
             {
-                timeSawPlayer = 0f;
                 AttackBehaviour();
             }
             else if (timeSawPlayer < timeSuspicion)
@@ -51,8 +52,13 @@ namespace RPG.Control
             {
                 PatrolBehaviour();
             }
+            UpdateTime();
+        }
 
+        private void UpdateTime()
+        {
             timeSawPlayer += Time.deltaTime;
+            timeArrivedAtWaypoint += Time.deltaTime;
         }
 
         void PatrolBehaviour()
@@ -62,11 +68,15 @@ namespace RPG.Control
             {
                 if (IsWaypoint())
                 {
+                    timeArrivedAtWaypoint = 0f;
                     CycleWaypoint();
                 }
                 nextPos = GetWaypoint();
             }
-            move.StartMove(nextPos);
+            if (timeArrivedAtWaypoint > waypointDwellTime)
+            {
+                move.StartMove(nextPos);
+            }
         }
 
         Vector3 GetWaypoint()
@@ -92,6 +102,7 @@ namespace RPG.Control
 
         void AttackBehaviour()
         {
+            timeSawPlayer = 0f;
             fighter.Attack(player);
         }
 
