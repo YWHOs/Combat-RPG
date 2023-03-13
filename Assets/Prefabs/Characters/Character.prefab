@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 720282722312533286}
   - component: {fileID: 8769461545472398650}
   - component: {fileID: 4872679013685321433}
+  - component: {fileID: 3500657685686091198}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -115,6 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75e17bcfb4676bd40b4d4a502a940e00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpeed: 6
 --- !u!95 &8430947779406357087
 Animator:
   serializedVersion: 3
@@ -200,3 +202,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b542fe89b1c4664386a6921b30b72ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3500657685686091198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337176355037330979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea9374b509b70f4bba37e4a2ca8cf00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueIdentifier: 
