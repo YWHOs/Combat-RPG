@@ -37,8 +37,16 @@ namespace RPG.SceneManagement
             Fader fader = FindObjectOfType<Fader>();
             yield return fader.FadeInCo(fadeTime);
 
+            // Save Current Level
+            SavingWrapper wrapper = FindObjectOfType<SavingWrapper>();
+            wrapper.Save();
+
             yield return SceneManager.LoadSceneAsync(sceneIndex);
 
+            // Load Current Level
+            wrapper.Load();
+
+            // 씬 이동시 spawn위치로 플레이어 이동
             Portal otherPortal = GetOtherPortal();
             UpdatePlayer(otherPortal);
 
