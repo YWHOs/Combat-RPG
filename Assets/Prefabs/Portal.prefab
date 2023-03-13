@@ -107,3 +107,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneIndex: 0
   spawnPoint: {fileID: 8654621962774739779}
+  destinationIdentify: 0
+  fadeTime: 1
