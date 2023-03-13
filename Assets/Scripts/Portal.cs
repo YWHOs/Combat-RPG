@@ -9,8 +9,15 @@ namespace RPG.SceneManagement
 {
     public class Portal : MonoBehaviour
     {
+        enum DestinationIdentify
+        {
+            a,
+            b,
+            c
+        }
         [SerializeField] int sceneIndex;
         [SerializeField] Transform spawnPoint;
+        [SerializeField] DestinationIdentify destinationIdentify;
         void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
@@ -21,6 +28,8 @@ namespace RPG.SceneManagement
 
         IEnumerator TransitionCo()
         {
+            if (sceneIndex < 0) yield break;
+
             DontDestroyOnLoad(gameObject);
             yield return SceneManager.LoadSceneAsync(sceneIndex);
 
@@ -42,6 +51,7 @@ namespace RPG.SceneManagement
             foreach(Portal portal in FindObjectsOfType<Portal>())
             {
                 if (portal == this) continue;
+                if (portal.destinationIdentify != destinationIdentify) continue;
                 return portal;
             }
             return null;
