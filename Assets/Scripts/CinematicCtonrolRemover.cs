@@ -10,6 +10,7 @@ namespace RPG.Cinematics
     public class CinematicCtonrolRemover : MonoBehaviour
     {
         GameObject player;
+        // Observer
         void Start()
         {
             GetComponent<PlayableDirector>().played += DisableControl;
