@@ -50,6 +50,8 @@ namespace RPG.SceneManagement
             Portal otherPortal = GetOtherPortal();
             UpdatePlayer(otherPortal);
 
+            wrapper.Save();
+
             yield return new WaitForSeconds(0.5f);
             yield return fader.FadeOutCo(fadeTime);
 

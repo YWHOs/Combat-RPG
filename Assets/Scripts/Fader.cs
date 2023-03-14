@@ -12,7 +12,10 @@ namespace RPG.SceneManagement
         {
             cvGroup = GetComponent<CanvasGroup>();
         }
-
+        public void FadeInImmediate()
+        {
+            cvGroup.alpha = 1;
+        }
         public IEnumerator FadeInCo(float _time)
         {
             while(cvGroup.alpha < 1)
