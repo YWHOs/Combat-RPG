@@ -11,9 +11,15 @@ namespace RPG.Combat
         [SerializeField] float weaponRange = 2f;
         [SerializeField] float time = 1f;
         [SerializeField] float weaponDamage = 15f;
+        [SerializeField] Transform handTrasnform;
+        [SerializeField] Weapon weapon;
 
         Health target;
         float lastTime = Mathf.Infinity;
+        void Start()
+        {
+            SpawnWeapon();
+        }
         void Update()
         {
             lastTime += Time.deltaTime;
@@ -29,7 +35,12 @@ namespace RPG.Combat
                 AttackAnimator();
             }
         }
-
+        void SpawnWeapon()
+        {
+            if (weapon == null) return;
+            Animator animator = GetComponent<Animator>();
+            weapon.Spawn(handTrasnform, animator);
+        }
         void AttackAnimator()
         {
             transform.LookAt(target.transform);
