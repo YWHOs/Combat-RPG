@@ -10,7 +10,8 @@ namespace RPG.Combat
     {
         [SerializeField] float time = 1f;
 
-        [SerializeField] Transform handTrasnform;
+        [SerializeField] Transform rightHandTransform;
+        [SerializeField] Transform leftHandTransform;
         [SerializeField] Weapon defaultWeapon;
 
 
@@ -40,7 +41,7 @@ namespace RPG.Combat
         {
             weapon = _weapon;
             Animator animator = GetComponent<Animator>();
-            _weapon.Spawn(handTrasnform, animator);
+            _weapon.Spawn(rightHandTransform, leftHandTransform, animator);
         }
         void AttackAnimator()
         {

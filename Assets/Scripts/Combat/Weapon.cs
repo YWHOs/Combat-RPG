@@ -15,10 +15,18 @@ namespace RPG.Combat
         [SerializeField] float weaponDamage = 15f;
         public float WeaponDamage => weaponDamage;
 
-        public void Spawn(Transform _hand, Animator _anim)
+        [SerializeField] bool isRightHand = true;
+
+        public void Spawn(Transform _rightHand, Transform _leftHand, Animator _anim)
         {
             if(equipPrefab != null)
-                Instantiate(equipPrefab, _hand);
+            {
+                Transform hand;
+                if (isRightHand) hand = _rightHand;
+                else hand = _leftHand;
+                Instantiate(equipPrefab, hand);
+            }
+
             if(animatorOverride != null)
                 _anim.runtimeAnimatorController = animatorOverride;
         }
