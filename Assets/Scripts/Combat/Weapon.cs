@@ -1,3 +1,4 @@
+using RPG.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace RPG.Combat
     {
         [SerializeField] AnimatorOverrideController animatorOverride;
         [SerializeField] GameObject equipPrefab;
+        [SerializeField] Projectile projectile;
 
         [SerializeField] float weaponRange = 2f;
         public float WeaponRange => weaponRange;
@@ -21,14 +23,30 @@ namespace RPG.Combat
         {
             if(equipPrefab != null)
             {
-                Transform hand;
-                if (isRightHand) hand = _rightHand;
-                else hand = _leftHand;
+                Transform hand = GetHandTransform(_rightHand, _leftHand);
                 Instantiate(equipPrefab, hand);
             }
 
-            if(animatorOverride != null)
+            if (animatorOverride != null)
                 _anim.runtimeAnimatorController = animatorOverride;
+        }
+
+        Transform GetHandTransform(Transform _rightHand, Transform _leftHand)
+        {
+            Transform hand;
+            if (isRightHand) hand = _rightHand;
+            else hand = _leftHand;
+            return hand;
+        }
+
+        public bool HasProjectile()
+        {
+            return projectile != null;
+        }
+        public void LaunchProjectile(Transform _rightHand, Transform _leftHand, Health _target)
+        {
+            Projectile projectileInstance = Instantiate(projectile, GetHandTransform(_rightHand, _leftHand).position, Quaternion.identity);
+            projectileInstance.SetTarget(_target);
         }
     }
 }
