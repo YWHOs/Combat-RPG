@@ -13,6 +13,7 @@ namespace RPG.Combat
         [SerializeField] Transform rightHandTransform;
         [SerializeField] Transform leftHandTransform;
         [SerializeField] Weapon defaultWeapon;
+        [SerializeField] string defaultWeaponName = "Unarmed";
 
 
         Health target;
@@ -20,7 +21,8 @@ namespace RPG.Combat
         float lastTime = Mathf.Infinity;
         void Start()
         {
-            EquipWeapon(defaultWeapon);
+            Weapon weapon = Resources.Load<Weapon>(defaultWeaponName);
+            EquipWeapon(weapon);
         }
         void Update()
         {
