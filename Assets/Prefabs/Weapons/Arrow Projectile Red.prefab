@@ -75,5 +75,9 @@ PrefabInstance:
       propertyPath: m_Parameters.colorGradient.key1.a
       value: 0.5882353
       objectReference: {fileID: 0}
+    - target: {fileID: 7043245153186115640, guid: b524af925b9ae6d41a77b1b845bc8864, type: 3}
+      propertyPath: hitEffect
+      value: 
+      objectReference: {fileID: 3458519732042473589, guid: a176ec8ed7373b342a766dd7d1e77849, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b524af925b9ae6d41a77b1b845bc8864, type: 3}
