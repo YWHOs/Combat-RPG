@@ -10,7 +10,7 @@ namespace RPG.Core
 {
     public class Health : MonoBehaviour, ISaveable
     {
-        [SerializeField] float health = 100f;
+        float health = -1f;
 
         bool isDead;
         public bool IsDead() { return isDead; }
