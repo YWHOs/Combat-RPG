@@ -5437,11 +5437,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2570346455785122544, guid: c1850ee4a0fa55a4baef8240fc8efd2d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.2426443
+      value: 7.071071
       objectReference: {fileID: 0}
     - target: {fileID: 2570346455785122544, guid: c1850ee4a0fa55a4baef8240fc8efd2d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 31.982647
+      value: 34.811073
       objectReference: {fileID: 0}
     - target: {fileID: 2570346456506830517, guid: c1850ee4a0fa55a4baef8240fc8efd2d, type: 3}
       propertyPath: m_DeadZoneWidth
@@ -5453,7 +5453,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2570346456506830517, guid: c1850ee4a0fa55a4baef8240fc8efd2d, type: 3}
       propertyPath: m_CameraDistance
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2570346456506830517, guid: c1850ee4a0fa55a4baef8240fc8efd2d, type: 3}
       propertyPath: m_DeadZoneHeight
@@ -5465,11 +5465,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2570346456506881531, guid: c1850ee4a0fa55a4baef8240fc8efd2d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.2426443
+      value: 7.071071
       objectReference: {fileID: 0}
     - target: {fileID: 2570346456506881531, guid: c1850ee4a0fa55a4baef8240fc8efd2d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 31.982647
+      value: 34.811073
       objectReference: {fileID: 0}
     - target: {fileID: 7483983984906308162, guid: c1850ee4a0fa55a4baef8240fc8efd2d, type: 3}
       propertyPath: defaultWeapon
