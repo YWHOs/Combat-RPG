@@ -46,6 +46,11 @@ namespace RPG.Combat
             Animator animator = GetComponent<Animator>();
             _weapon.Spawn(rightHandTransform, leftHandTransform, animator);
         }
+
+        public Health GetTarget()
+        {
+            return target;
+        }
         void AttackAnimator()
         {
             transform.LookAt(target.transform);

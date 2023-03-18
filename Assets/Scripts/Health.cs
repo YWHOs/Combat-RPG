@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RPG.Saving;
+using RPG.Stat;
 
 namespace RPG.Core
 {
@@ -12,6 +13,10 @@ namespace RPG.Core
         bool isDead;
         public bool IsDead() { return isDead; }
 
+        void Start()
+        {
+            health = GetComponent<BaseStat>().GetHealth();
+        }
 
         public void TakeDamage(float _damage)
         {
@@ -20,6 +25,10 @@ namespace RPG.Core
             {
                 Die();
             }
+        }
+        public float PercentageHealth()
+        {
+            return 100 * (health / GetComponent<BaseStat>().GetHealth());
         }
 
         private void Die()

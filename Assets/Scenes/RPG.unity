@@ -5383,6 +5383,10 @@ PrefabInstance:
       propertyPath: go
       value: 
       objectReference: {fileID: 3325816869673412519, guid: 7591b8a6618523d4e9a1c5ad05fc2b8b, type: 3}
+    - target: {fileID: 542588874236216024, guid: c1850ee4a0fa55a4baef8240fc8efd2d, type: 3}
+      propertyPath: level
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2570346455447570496, guid: c1850ee4a0fa55a4baef8240fc8efd2d, type: 3}
       propertyPath: m_RootOrder
       value: 0
