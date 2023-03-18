@@ -17,7 +17,11 @@ namespace RPG.Core
 
         void Start()
         {
-            health = GetComponent<BaseStat>().GetStat(Stats.Health);
+            if(health < 0)
+            {
+                health = GetComponent<BaseStat>().GetStat(Stats.Health);
+            }
+            
         }
 
         public void TakeDamage(GameObject _instigator, float _damage)
