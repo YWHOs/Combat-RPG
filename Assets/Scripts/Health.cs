@@ -17,7 +17,7 @@ namespace RPG.Core
 
         void Start()
         {
-            health = GetComponent<BaseStat>().GetHealth();
+            health = GetComponent<BaseStat>().GetStat(Stats.Health);
         }
 
         public void TakeDamage(GameObject _instigator, float _damage)
@@ -31,7 +31,7 @@ namespace RPG.Core
         }
         public float PercentageHealth()
         {
-            return 100 * (health / GetComponent<BaseStat>().GetHealth());
+            return 100 * (health / GetComponent<BaseStat>().GetStat(Stats.Health));
         }
 
         private void Die()
@@ -46,7 +46,7 @@ namespace RPG.Core
             Experience exp = _instigator.GetComponent<Experience>();
             if (exp == null) return;
 
-            exp.GetExp(GetComponent<BaseStat>().GetEXP());
+            exp.GetExp(GetComponent<BaseStat>().GetStat(Stats.EXP));
         }
         public object CaptureState()
         {
