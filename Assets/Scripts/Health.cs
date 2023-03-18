@@ -10,6 +10,7 @@ namespace RPG.Core
 {
     public class Health : MonoBehaviour, ISaveable
     {
+        [SerializeField] float regeneratePercent = 70f;
         float health = -1f;
 
         bool isDead;
@@ -17,12 +18,14 @@ namespace RPG.Core
 
         void Start()
         {
-            if(health < 0)
+            GetComponent<BaseStat>().onLevelUp += RegenerateHealth;
+            if (health < 0)
             {
                 health = GetComponent<BaseStat>().GetStat(Stats.Health);
             }
             
         }
+
 
         public void TakeDamage(GameObject _instigator, float _damage)
         {
@@ -36,6 +39,11 @@ namespace RPG.Core
         public float PercentageHealth()
         {
             return 100 * (health / GetComponent<BaseStat>().GetStat(Stats.Health));
+        }
+        private void RegenerateHealth()
+        {
+            float regenHealth = GetComponent<BaseStat>().GetStat(Stats.Health) * (regeneratePercent / 100);
+            health = Mathf.Max(health, regenHealth);
         }
 
         private void Die()
