@@ -74,11 +74,11 @@ namespace RPG.Combat
 
             if (weapon.HasProjectile())
             {
-                weapon.LaunchProjectile(rightHandTransform, leftHandTransform, target);
+                weapon.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject);
             }
             else
             {
-                target.TakeDamage(weapon.WeaponDamage);
+                target.TakeDamage(gameObject, weapon.WeaponDamage);
             }
         }
         void Shoot()

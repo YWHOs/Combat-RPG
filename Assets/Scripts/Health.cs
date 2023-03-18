@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.Saving;
 using RPG.Stat;
+using System;
+using RPG.Combat;
 
 namespace RPG.Core
 {
@@ -18,12 +20,13 @@ namespace RPG.Core
             health = GetComponent<BaseStat>().GetHealth();
         }
 
-        public void TakeDamage(float _damage)
+        public void TakeDamage(GameObject _instigator, float _damage)
         {
             health = Mathf.Max(health - _damage, 0);
             if(health == 0)
             {
                 Die();
+                AwardExp(_instigator);
             }
         }
         public float PercentageHealth()
@@ -38,7 +41,13 @@ namespace RPG.Core
             GetComponent<Animator>().SetTrigger("Die");
             GetComponent<ActionScheduler>().CancelAction();
         }
+        private void AwardExp(GameObject _instigator)
+        {
+            Experience exp = _instigator.GetComponent<Experience>();
+            if (exp == null) return;
 
+            exp.GetExp(GetComponent<BaseStat>().GetEXP());
+        }
         public object CaptureState()
         {
             return health;

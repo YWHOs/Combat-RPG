@@ -18,12 +18,11 @@ namespace RPG.Combat
             if(fighter.GetTarget() == null)
             {
                 GetComponent<UnityEngine.UI.Text>().text = "N/A";
+                return;
             }
-            else
-            {
-                Health health = fighter.GetTarget();
-                GetComponent<UnityEngine.UI.Text>().text = health.PercentageHealth() + "%";
-            }
+            Health health = fighter.GetTarget();
+            GetComponent<UnityEngine.UI.Text>().text = health.PercentageHealth() + "%";
+
 
         }
     }
