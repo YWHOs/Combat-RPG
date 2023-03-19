@@ -18,14 +18,28 @@ namespace RPG.Stat
         public event Action onLevelUp;
 
         int currentLevel = 0;
+        Experience experience;
 
+        void Awake()
+        {
+            experience = GetComponent<Experience>();
+        }
         void Start()
         {
             currentLevel = CalculateLevel();
-            Experience experience = GetComponent<Experience>();
-            if(experience != null)
+        }
+        void OnEnable()
+        {
+            if (experience != null)
             {
                 experience.onExperienceGain += UpdateLevel;
+            }
+        }
+        void OnDisable()
+        {
+            if (experience != null)
+            {
+                experience.onExperienceGain -= UpdateLevel;
             }
         }
 

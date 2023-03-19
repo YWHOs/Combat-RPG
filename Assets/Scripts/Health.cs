@@ -18,12 +18,19 @@ namespace RPG.Core
 
         void Start()
         {
-            GetComponent<BaseStat>().onLevelUp += RegenerateHealth;
             if (health < 0)
             {
                 health = GetComponent<BaseStat>().GetStat(Stats.Health);
             }
             
+        }
+        void OnEnable()
+        {
+            GetComponent<BaseStat>().onLevelUp += RegenerateHealth;
+        }
+        void OnDisable()
+        {
+            GetComponent<BaseStat>().onLevelUp -= RegenerateHealth;
         }
 
 

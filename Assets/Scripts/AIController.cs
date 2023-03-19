@@ -27,14 +27,17 @@ namespace RPG.Control
         Health health;
         Move move;
         GameObject player;
-        // Start is called before the first frame update
-        void Start()
+
+        void Awake()
         {
             fighter = GetComponent<Fighter>();
             health = GetComponent<Health>();
             move = GetComponent<Move>();
             player = GameObject.FindWithTag("Player");
-
+        }
+        // Start is called before the first frame update
+        void Start()
+        {
             originPos = transform.position;
         }
 

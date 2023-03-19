@@ -13,11 +13,12 @@ namespace RPG.Movement
 
         NavMeshAgent nav;
         Health health;
-        void Start()
+        void Awake()
         {
             nav = GetComponent<NavMeshAgent>();
             health = GetComponent<Health>();
         }
+
         // Update is called once per frame
         void Update()
         {
@@ -71,12 +72,13 @@ namespace RPG.Movement
         {
             MoveSaveData data = (MoveSaveData)state;
             //Dictionary<string, object> data = (Dictionary<string, object>)state;
-            GetComponent<NavMeshAgent>().enabled = false;
+            nav.enabled = false;
             transform.position = data.position.ToVector();
             transform.eulerAngles = data.rotation.ToVector();
             //transform.position = ((SerializableVector3)data["position"]).ToVector();
             //transform.eulerAngles = ((SerializableVector3)data["rotation"]).ToVector();
-            GetComponent<NavMeshAgent>().enabled = true;
+            nav.enabled = true;
+            GetComponent<ActionScheduler>().CancelAction();
         }
     }
 
