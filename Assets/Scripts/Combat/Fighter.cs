@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour, IAction, ISaveable
+    public class Fighter : MonoBehaviour, IAction, ISaveable, IModifierProvider
     {
         [SerializeField] float time = 1f;
 
@@ -115,7 +115,13 @@ namespace RPG.Combat
             GetComponent<Animator>().ResetTrigger("Attack");
             GetComponent<Animator>().SetTrigger("StopAttack");
         }
-
+        public IEnumerable<float> GetAddModifier(Stats _stat)
+        {
+            if(_stat == Stats.Damage)
+            {
+                yield return weapon.WeaponDamage;
+            }
+        }
         public object CaptureState()
         {
             return weapon.name;
