@@ -14,7 +14,7 @@ namespace RPG.Core
 
         void Update()
         {
-            GetComponent<UnityEngine.UI.Text>().text = health.PercentageHealth() + "%";
+            GetComponent<UnityEngine.UI.Text>().text = string.Format("{0:0}/{1:0}", health.GetHealth(), health.GetMaxHealth());
         }
     }
 }

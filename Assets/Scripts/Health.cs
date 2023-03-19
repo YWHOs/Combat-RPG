@@ -36,6 +36,15 @@ namespace RPG.Core
                 AwardExp(_instigator);
             }
         }
+
+        public float GetHealth()
+        {
+            return health;
+        }
+        public float GetMaxHealth()
+        {
+            return GetComponent<BaseStat>().GetStat(Stats.Health);
+        }
         public float PercentageHealth()
         {
             return 100 * (health / GetComponent<BaseStat>().GetStat(Stats.Health));

@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 3030319883451198325}
   - component: {fileID: 7602304187918546997}
   - component: {fileID: 1715725659672021034}
-  - component: {fileID: 1577490339530576049}
+  - component: {fileID: 3150227590170405675}
   m_Layer: 5
   m_Name: Enemy Health Percent
   m_TagString: Untagged
@@ -159,7 +159,7 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 100%
---- !u!114 &1577490339530576049
+--- !u!114 &3150227590170405675
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3451677902866653613}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58196c5382fdf6e4ca44032133542402, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a7f194e0a23b8b4780c0454745584f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3935759072581632035

@@ -4,6 +4,7 @@ namespace RPG.Stat
     {
         Health,
         EXP,
-        EXPToLevelUp
+        EXPToLevelUp,
+        Damage
     }
 }

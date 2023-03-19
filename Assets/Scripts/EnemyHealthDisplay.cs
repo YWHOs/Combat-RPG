@@ -18,9 +18,10 @@ namespace RPG.Combat
             if(fighter.GetTarget() == null)
             {
                 GetComponent<UnityEngine.UI.Text>().text = "N/A";
+                return;
             }
             Health health = fighter.GetTarget();
-            GetComponent<UnityEngine.UI.Text>().text = health.PercentageHealth() + "%";
+            GetComponent<UnityEngine.UI.Text>().text = string.Format("{0:0}/{1:0}", health.GetHealth(), health.GetMaxHealth());
         }
     }
 }
