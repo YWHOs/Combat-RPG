@@ -13,6 +13,7 @@ namespace RPG.Stat
         [SerializeField] CharacterClass characterClass;
         [SerializeField] Progression progression;
         [SerializeField] GameObject levelUpEffect;
+        [SerializeField] bool isUseModifier;
 
         public event Action onLevelUp;
 
@@ -46,11 +47,17 @@ namespace RPG.Stat
 
         public float GetStat(Stats _stat)
         {
-            return progression.GetStat(_stat, characterClass, GetLevel()) + GetAddModifier(_stat);
+            return (GetBaseStat(_stat) + GetAddModifier(_stat)) * (1 + GetPercentModifier(_stat) / 100);
+        }
+
+        float GetBaseStat(Stats _stat)
+        {
+            return progression.GetStat(_stat, characterClass, GetLevel());
         }
 
         float GetAddModifier(Stats _stat)
         {
+            if (!isUseModifier) return 0;
             float total = 0;
             foreach(IModifierProvider provider in GetComponents<IModifierProvider>())
             {
@@ -61,7 +68,19 @@ namespace RPG.Stat
             }
             return total;
         }
-
+        float GetPercentModifier(Stats _stat)
+        {
+            if (!isUseModifier) return 0;
+            float total = 0;
+            foreach (IModifierProvider provider in GetComponents<IModifierProvider>())
+            {
+                foreach (float modify in provider.GetPercentModifier(_stat))
+                {
+                    total += modify;
+                }
+            }
+            return total;
+        }
         public int GetLevel()
         {
             if(currentLevel < 1)

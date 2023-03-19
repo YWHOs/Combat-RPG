@@ -17,6 +17,8 @@ namespace RPG.Combat
         public float WeaponRange => weaponRange;
         [SerializeField] float weaponDamage = 15f;
         public float WeaponDamage => weaponDamage;
+        [SerializeField] float percentBonus;
+        public float PercentBonus => percentBonus;
 
         [SerializeField] bool isRightHand = true;
 
