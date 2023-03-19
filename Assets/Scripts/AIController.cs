@@ -1,6 +1,7 @@
 using RPG.Combat;
 using RPG.Core;
 using RPG.Movement;
+using RPG.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,7 +19,8 @@ namespace RPG.Control
         [Range(0, 1)]
         [SerializeField] float patrolSpeed = 0.2f;
 
-        Vector3 originPos;
+        LazyValue<Vector3> originPos;
+        //Vector3 originPos;
         float timeSawPlayer = Mathf.Infinity;
         float timeArrivedAtWaypoint = Mathf.Infinity;
         int currentWaypoint;
@@ -34,11 +36,17 @@ namespace RPG.Control
             health = GetComponent<Health>();
             move = GetComponent<Move>();
             player = GameObject.FindWithTag("Player");
+
+            originPos = new LazyValue<Vector3>(GetGuardPosition);
+        }
+        Vector3 GetGuardPosition()
+        {
+            return transform.position;
         }
         // Start is called before the first frame update
         void Start()
         {
-            originPos = transform.position;
+            originPos.ForceInit();
         }
 
         // Update is called once per frame
@@ -68,7 +76,7 @@ namespace RPG.Control
 
         void PatrolBehaviour()
         {
-            Vector3 nextPos = originPos;
+            Vector3 nextPos = originPos.value;
             if(patrolPath != null)
             {
                 if (IsWaypoint())

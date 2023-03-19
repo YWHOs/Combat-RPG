@@ -5,23 +5,33 @@ using RPG.Saving;
 using RPG.Stat;
 using System;
 using RPG.Combat;
+using RPG.Utils;
 
 namespace RPG.Core
 {
     public class Health : MonoBehaviour, ISaveable
     {
         [SerializeField] float regeneratePercent = 70f;
-        float health = -1f;
+        LazyValue<float> health;
 
         bool isDead;
         public bool IsDead() { return isDead; }
 
+        void Awake()
+        {
+            health = new LazyValue<float>(GetInitialHealth);
+        }
+        float GetInitialHealth()
+        {
+            return GetComponent<BaseStat>().GetStat(Stats.Health);
+        }
         void Start()
         {
-            if (health < 0)
-            {
-                health = GetComponent<BaseStat>().GetStat(Stats.Health);
-            }
+            health.ForceInit();
+            //if (health < 0)
+            //{
+            //    health = GetComponent<BaseStat>().GetStat(Stats.Health);
+            //}
             
         }
         void OnEnable()
@@ -36,8 +46,8 @@ namespace RPG.Core
 
         public void TakeDamage(GameObject _instigator, float _damage)
         {
-            health = Mathf.Max(health - _damage, 0);
-            if(health == 0)
+            health.value = Mathf.Max(health.value - _damage, 0);
+            if(health.value == 0)
             {
                 Die();
                 AwardExp(_instigator);
@@ -46,7 +56,7 @@ namespace RPG.Core
 
         public float GetHealth()
         {
-            return health;
+            return health.value;
         }
         public float GetMaxHealth()
         {
@@ -54,12 +64,12 @@ namespace RPG.Core
         }
         public float PercentageHealth()
         {
-            return 100 * (health / GetComponent<BaseStat>().GetStat(Stats.Health));
+            return 100 * (health.value / GetComponent<BaseStat>().GetStat(Stats.Health));
         }
         private void RegenerateHealth()
         {
             float regenHealth = GetComponent<BaseStat>().GetStat(Stats.Health) * (regeneratePercent / 100);
-            health = Mathf.Max(health, regenHealth);
+            health.value = Mathf.Max(health.value, regenHealth);
         }
 
         private void Die()
@@ -82,9 +92,9 @@ namespace RPG.Core
         }
         public void RestoreState(object state)
         {
-            health = (float)state;
+            health.value = (float)state;
 
-            if (health == 0)
+            if (health.value == 0)
             {
                 Die();
             }

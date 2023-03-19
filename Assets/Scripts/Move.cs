@@ -19,7 +19,7 @@ namespace RPG.Movement
             health = GetComponent<Health>();
         }
 
-        // Update is called once per frame
+
         void Update()
         {
             nav.enabled = !health.IsDead();
