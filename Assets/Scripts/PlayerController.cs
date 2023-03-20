@@ -41,7 +41,7 @@ namespace RPG.Control
 
         bool InteractWithComponent()
         {
-            RaycastHit[] hits = Physics.RaycastAll(GetRay());
+            RaycastHit[] hits = RaycastAllSorted();
             foreach (RaycastHit hit in hits)
             {
                 IRayCastable[] raycastables = hit.transform.GetComponents<IRayCastable>();
@@ -55,6 +55,18 @@ namespace RPG.Control
                 }
             }
             return false;
+        }
+        RaycastHit[] RaycastAllSorted()
+        {
+            // 객체가 겹쳤을 때, 거리 계산으로 가까운거 가져오기
+            RaycastHit[] hits = Physics.RaycastAll(GetRay());
+            float[] distances = new float[hits.Length];
+            for (int i = 0; i < hits.Length; i++)
+            {
+                distances[i] = hits[i].distance;
+            }
+            Array.Sort(distances, hits);
+            return hits;
         }
 
         bool InteractWithUI()
