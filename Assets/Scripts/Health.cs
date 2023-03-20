@@ -88,7 +88,7 @@ namespace RPG.Core
         }
         public object CaptureState()
         {
-            return health;
+            return health.value;
         }
         public void RestoreState(object state)
         {
