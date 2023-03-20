@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
 namespace RPG.Control
@@ -20,7 +21,8 @@ namespace RPG.Control
             public Texture2D texture;
             public Vector2 hotspot;
         }
-        [SerializeField] CursorMapping[] cursorMappings; 
+        [SerializeField] CursorMapping[] cursorMappings;
+        [SerializeField] float maxNavMeshDistance = 1f;
 
         void Awake()
         {
@@ -81,19 +83,32 @@ namespace RPG.Control
 
         bool InteractMove()
         {
-            RaycastHit hit;
-            bool isHit = Physics.Raycast(GetRay(), out hit);
-
+            Vector3 target;
+            bool isHit = RaycastNavMesh(out target);
             if (isHit)
             {
                 if (Input.GetMouseButton(0))
                 {
-                    GetComponent<Move>().StartMove(hit.point, 1f);
+                    GetComponent<Move>().StartMove(target, 1f);
                 }
                 SetCursor(CursorType.Move);
                 return true;
             }
             return false;
+        }
+        bool RaycastNavMesh(out Vector3 _target)
+        {
+            _target = new Vector3();
+            RaycastHit hit;
+            bool isHit = Physics.Raycast(GetRay(), out hit);
+            if (!isHit) return false;
+
+            NavMeshHit navHit;
+            bool isCastToNavMesh = NavMesh.SamplePosition(hit.point, out navHit, maxNavMeshDistance, NavMesh.AllAreas);
+            if (!isCastToNavMesh) return false;
+
+            _target = navHit.position;
+            return true;
         }
         void SetCursor(CursorType _type)
         {
