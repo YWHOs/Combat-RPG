@@ -105,6 +105,14 @@ PrefabInstance:
       propertyPath: m_Speed
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6775715827745707984, guid: 33ac4d4580e08df4095d89f5dd928b88, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6775715827745707984, guid: 33ac4d4580e08df4095d89f5dd928b88, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3653216718624949234, guid: 33ac4d4580e08df4095d89f5dd928b88, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 33ac4d4580e08df4095d89f5dd928b88, type: 3}
