@@ -13,7 +13,7 @@ namespace RPG.Core
     public class Health : MonoBehaviour, ISaveable
     {
         [SerializeField] float regeneratePercent = 70f;
-        [SerializeField] UnityEvent takeDamage;
+        [SerializeField] UnityEvent<float> takeDamage;
         LazyValue<float> health;
 
         bool isDead;
@@ -56,7 +56,7 @@ namespace RPG.Core
             }
             else
             {
-                takeDamage.Invoke();
+                takeDamage.Invoke(_damage);
             }
         }
 
