@@ -70,7 +70,11 @@ namespace RPG.Core
         }
         public float PercentageHealth()
         {
-            return 100 * (health.value / GetComponent<BaseStat>().GetStat(Stats.Health));
+            return 100 * GetFraction();
+        }
+        public float GetFraction()
+        {
+            return (health.value / GetComponent<BaseStat>().GetStat(Stats.Health));
         }
         private void RegenerateHealth()
         {
