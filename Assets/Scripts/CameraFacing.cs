@@ -6,8 +6,7 @@ namespace RPG.Core
 {
     public class CameraFacing : MonoBehaviour
     {
-
-        void Update()
+        void LateUpdate()
         {
             // UI æ’ πÊ«‚
             transform.forward = Camera.main.transform.forward;
