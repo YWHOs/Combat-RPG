@@ -17,23 +17,23 @@ namespace RPG.SceneManagement
         {
             cvGroup.alpha = 1;
         }
-        public IEnumerator FadeInCo(float _time)
+        public Coroutine FadeInCo(float _time)
         {
             return FadeCo(1, _time);
         }
-        public IEnumerator FadeOutCo(float _time)
+        public Coroutine FadeOutCo(float _time)
         {
             return FadeCo(0, _time);
         }
 
-        public IEnumerator FadeCo(float _target, float _time)
+        public Coroutine FadeCo(float _target, float _time)
         {
             if (currentActive != null)
             {
                 StopCoroutine(currentActive);
             }
             currentActive = StartCoroutine(FadeRoutine(_target, _time));
-            yield return currentActive;
+            return currentActive;
         }
         IEnumerator FadeRoutine(float _target, float _time)
         {
