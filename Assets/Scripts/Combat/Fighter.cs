@@ -16,19 +16,19 @@ namespace RPG.Combat
 
         [SerializeField] Transform rightHandTransform;
         [SerializeField] Transform leftHandTransform;
-        [SerializeField] Weapon defaultWeapon;
+        [SerializeField] WeaponConfig defaultWeapon;
 
         Health target;
         //Weapon weapon;
-        LazyValue<Weapon> weapon;
+        LazyValue<WeaponConfig> weapon;
         float lastTime = Mathf.Infinity;
 
         void Awake()
         {
-            weapon = new LazyValue<Weapon>(SetDefaultWeapon);
+            weapon = new LazyValue<WeaponConfig>(SetDefaultWeapon);
         }
 
-        Weapon SetDefaultWeapon()
+        WeaponConfig SetDefaultWeapon()
         {
             AttachWeapon(defaultWeapon);
             return defaultWeapon;
@@ -53,13 +53,13 @@ namespace RPG.Combat
                 AttackAnimator();
             }
         }
-        public void EquipWeapon(Weapon _weapon)
+        public void EquipWeapon(WeaponConfig _weapon)
         {
             weapon.value = _weapon;
             AttachWeapon(_weapon);
         }
 
-        private void AttachWeapon(Weapon _weapon)
+        private void AttachWeapon(WeaponConfig _weapon)
         {
             Animator animator = GetComponent<Animator>();
             _weapon.Spawn(rightHandTransform, leftHandTransform, animator);
@@ -155,7 +155,7 @@ namespace RPG.Combat
         public void RestoreState(object state)
         {
             string weaponName = (string)state;
-            Weapon weapon = Resources.Load<Weapon>(weaponName);
+            WeaponConfig weapon = Resources.Load<WeaponConfig>(weaponName);
             EquipWeapon(weapon);
         }
     }

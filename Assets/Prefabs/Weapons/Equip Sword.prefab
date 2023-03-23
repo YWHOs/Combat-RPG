@@ -91,6 +91,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6487840766875956712}
+  - component: {fileID: 900530572678349557}
   m_Layer: 0
   m_Name: Equip Sword
   m_TagString: Untagged
@@ -113,3 +114,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -60, y: 180, z: -200}
+--- !u!114 &900530572678349557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3948778296626851279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc43a6b254360614b854a4241a04a505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
