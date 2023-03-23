@@ -14,6 +14,7 @@ namespace RPG.Core
     {
         [SerializeField] float regeneratePercent = 70f;
         [SerializeField] UnityEvent<float> takeDamage;
+        [SerializeField] UnityEvent onDie;
         LazyValue<float> health;
 
         bool isDead;
@@ -51,6 +52,7 @@ namespace RPG.Core
             health.value = Mathf.Max(health.value - _damage, 0);
             if (health.value == 0)
             {
+                onDie.Invoke();
                 Die();
                 AwardExp(_instigator);
             }
