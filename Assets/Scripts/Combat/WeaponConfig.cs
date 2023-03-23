@@ -24,14 +24,15 @@ namespace RPG.Combat
 
         const string weaponName = "weapon";
 
-        public void Spawn(Transform _rightHand, Transform _leftHand, Animator _anim)
+        public Weapon Spawn(Transform _rightHand, Transform _leftHand, Animator _anim)
         {
             DestroyOldWeapon(_rightHand, _leftHand);
 
-            if(equipPrefab != null)
+            Weapon weapon = null;
+            if (equipPrefab != null)
             {
                 Transform hand = GetHandTransform(_rightHand, _leftHand);
-                Weapon weapon = Instantiate(equipPrefab, hand);
+                weapon = Instantiate(equipPrefab, hand);
                 weapon.gameObject.name = weaponName;
             }
 
@@ -44,7 +45,7 @@ namespace RPG.Combat
             {
                 _anim.runtimeAnimatorController = overrideController.runtimeAnimatorController;
             }
-
+            return weapon;
         }
 
         void DestroyOldWeapon(Transform _rightHand, Transform _leftHand)

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bow Black Projectile
   m_EditorClassIdentifier: 
   animatorOverride: {fileID: 22100000, guid: c06f02a8f9b2a0a4da4f5e9a29a6ca20, type: 2}
-  equipPrefab: {fileID: 4357257281210011070, guid: 0c8d6079dfc292d49a417bcc5ae05122, type: 3}
+  equipPrefab: {fileID: 4916490033442723197, guid: 0c8d6079dfc292d49a417bcc5ae05122, type: 3}
   projectile: {fileID: 5367640436793979969, guid: 39a1e6691ede800419152aa13ba756f0, type: 3}
   weaponRange: 10
   weaponDamage: 5
