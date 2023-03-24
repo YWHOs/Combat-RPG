@@ -37,6 +37,7 @@ namespace RPG.Core
             //}
             
         }
+
         void OnEnable()
         {
             GetComponent<BaseStat>().onLevelUp += RegenerateHealth;
@@ -82,6 +83,10 @@ namespace RPG.Core
         {
             float regenHealth = GetComponent<BaseStat>().GetStat(Stats.Health) * (regeneratePercent / 100);
             health.value = Mathf.Max(health.value, regenHealth);
+        }
+        public void Heal(float _healthRecover)
+        {
+            health.value = Mathf.Min(health.value + _healthRecover, GetMaxHealth());
         }
 
         private void Die()
