@@ -10,6 +10,7 @@ namespace RPG.Movement
     public class Move : MonoBehaviour, IAction, ISaveable
     {
         [SerializeField] float maxSpeed = 6f;
+        [SerializeField] float maxNavPathLength = 40f;
 
         NavMeshAgent nav;
         Health health;
@@ -37,6 +38,16 @@ namespace RPG.Movement
             nav.speed = maxSpeed * Mathf.Clamp01(_speed);
             nav.isStopped = false;
         }
+        public bool CanMoveTo(Vector3 _destination)
+        {
+            NavMeshPath path = new NavMeshPath();
+            bool hasPath = NavMesh.CalculatePath(transform.position, _destination, NavMesh.AllAreas, path);
+            if (!hasPath) return false;
+            if (path.status != NavMeshPathStatus.PathComplete) return false;
+            if (GetPathLength(path) > maxNavPathLength) return false;
+
+            return true;
+        }
         public void Cancel()
         {
             nav.isStopped = true;
@@ -49,6 +60,18 @@ namespace RPG.Movement
             float speed = local.z;
             GetComponent<Animator>().SetFloat("ForwardSpeed", speed);
         }
+
+        private float GetPathLength(NavMeshPath _path)
+        {
+            float total = 0;
+            if (_path.corners.Length < 2) return total;
+            for (int i = 0; i < _path.corners.Length - 1; i++)
+            {
+                total += Vector3.Distance(_path.corners[i], _path.corners[i + 1]);
+            }
+            return total;
+        }
+
 
         [System.Serializable]
         struct MoveSaveData
