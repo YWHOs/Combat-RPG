@@ -94,6 +94,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 720282722312533286, guid: 33ac4d4580e08df4095d89f5dd928b88, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 720282722312533286, guid: 33ac4d4580e08df4095d89f5dd928b88, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 720282722312533286, guid: 33ac4d4580e08df4095d89f5dd928b88, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 6830439432971380026}
+    - target: {fileID: 720282722312533286, guid: 33ac4d4580e08df4095d89f5dd928b88, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 720282722312533286, guid: 33ac4d4580e08df4095d89f5dd928b88, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Aggresive
+      objectReference: {fileID: 0}
+    - target: {fileID: 720282722312533286, guid: 33ac4d4580e08df4095d89f5dd928b88, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: RPG.Control.AIController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 720282722312533286, guid: 33ac4d4580e08df4095d89f5dd928b88, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1093697300547316602, guid: 33ac4d4580e08df4095d89f5dd928b88, type: 3}
       propertyPath: weapon
       value: 
@@ -168,7 +196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6775715827745707984, guid: 33ac4d4580e08df4095d89f5dd928b88, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6775715827745707984, guid: 33ac4d4580e08df4095d89f5dd928b88, type: 3}
       propertyPath: m_LocalPosition.y

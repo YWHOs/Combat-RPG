@@ -13,6 +13,7 @@ namespace RPG.Control
     {
         [SerializeField] float chaseDt = 5f;
         [SerializeField] float timeSuspicion = 4f;
+        [SerializeField] float timeAgressiveCoolDown = 4f;
         [SerializeField] PatrolPath patrolPath;
         [SerializeField] float waypoint = 1f;
         [SerializeField] float waypointDwellTime = 3f;
@@ -23,6 +24,7 @@ namespace RPG.Control
         //Vector3 originPos;
         float timeSawPlayer = Mathf.Infinity;
         float timeArrivedAtWaypoint = Mathf.Infinity;
+        float timeAggresive = Mathf.Infinity;
         int currentWaypoint;
 
         Fighter fighter;
@@ -68,10 +70,16 @@ namespace RPG.Control
             UpdateTime();
         }
 
+        public void Aggresive()
+        {
+            timeAggresive = 0;
+
+        }
         private void UpdateTime()
         {
             timeSawPlayer += Time.deltaTime;
             timeArrivedAtWaypoint += Time.deltaTime;
+            timeAggresive += Time.deltaTime;
         }
 
         void PatrolBehaviour()
@@ -128,7 +136,7 @@ namespace RPG.Control
         bool IsAttackRange()
         {
             float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
-            return distanceToPlayer < chaseDt;
+            return distanceToPlayer < chaseDt || timeAggresive < timeAgressiveCoolDown;
         }
     }
 
