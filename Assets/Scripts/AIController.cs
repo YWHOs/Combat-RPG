@@ -19,6 +19,7 @@ namespace RPG.Control
         [SerializeField] float waypointDwellTime = 3f;
         [Range(0, 1)]
         [SerializeField] float patrolSpeed = 0.2f;
+        [SerializeField] float shoutDistance = 5f;
 
         LazyValue<Vector3> originPos;
         //Vector3 originPos;
@@ -125,6 +126,19 @@ namespace RPG.Control
         {
             timeSawPlayer = 0f;
             fighter.Attack(player);
+
+            NearByEnemies();
+        }
+
+        private void NearByEnemies()
+        {
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position, shoutDistance, Vector3.up, 0);
+            foreach(RaycastHit hit in hits)
+            {
+                AIController ai = hit.collider.GetComponent<AIController>();
+                if (ai == null) continue;
+                ai.Aggresive();
+            }
         }
 
         void OnDrawGizmosSelected()

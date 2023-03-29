@@ -23,6 +23,7 @@ namespace RPG.Control
         }
         [SerializeField] CursorMapping[] cursorMappings;
         [SerializeField] float maxNavMeshDistance = 1f;
+        [SerializeField] float raycastRadius = 1f;
 
         void Awake()
         {
@@ -61,7 +62,7 @@ namespace RPG.Control
         RaycastHit[] RaycastAllSorted()
         {
             // 객체가 겹쳤을 때, 거리 계산으로 가까운거 가져오기
-            RaycastHit[] hits = Physics.RaycastAll(GetRay());
+            RaycastHit[] hits = Physics.SphereCastAll(GetRay(), raycastRadius);
             float[] distances = new float[hits.Length];
             for (int i = 0; i < hits.Length; i++)
             {
