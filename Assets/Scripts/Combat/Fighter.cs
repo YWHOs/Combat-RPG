@@ -44,7 +44,7 @@ namespace RPG.Combat
             lastTime += Time.deltaTime;
             if (target == null) return;
             if (target.IsDead()) return;
-            if (target != null && !IsRange())
+            if (!IsRange(target.transform))
             {
                 GetComponent<Move>().MoveTo(target.transform.position, 1f);
             }
@@ -110,9 +110,9 @@ namespace RPG.Combat
         {
             Hit();
         }
-        bool IsRange()
+        bool IsRange(Transform _target)
         {
-            return Vector3.Distance(transform.position, target.transform.position) < weaponConfig.WeaponRange;
+            return Vector3.Distance(transform.position, _target.position) < weaponConfig.WeaponRange;
         }
 
         public void Attack(GameObject _target)
@@ -123,7 +123,7 @@ namespace RPG.Combat
         public bool CanAttack(GameObject _target)
         {
             if(_target == null) { return false; }
-            if (!GetComponent<Move>().CanMoveTo(_target.transform.position)) return false;
+            if (!GetComponent<Move>().CanMoveTo(_target.transform.position) && !IsRange(_target.transform)) return false;
 
             Health health = _target.GetComponent<Health>();
             return health != null && !health.IsDead();
